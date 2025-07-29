@@ -596,27 +596,27 @@ const AppLayout = () => {
       currentPath: window.location.pathname,
     });
 
-    // TEMPORARY: Show loading spinner instead of redirecting
-    console.log("Showing loading spinner...");
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <CircularProgress />
-        <Typography variant="body2" sx={{ ml: 2 }}>
-          {!profileLoaded
-            ? "Loading profile..."
-            : !permissionsLoaded
-            ? "Loading permissions..."
-            : "Initializing..."}
-        </Typography>
-      </Box>
-    );
+    // TEMPORARY: Skip loading state for testing
+    console.log("Skipping loading state for testing...");
+    // return (
+    //   <Box
+    //     sx={{
+    //       display: "flex",
+    //       justifyContent: "center",
+    //       alignItems: "center",
+    //       height: "100vh",
+    //     }}
+    //   >
+    //     <CircularProgress />
+    //     <Typography variant="body2" sx={{ ml: 2 }}>
+    //       {!profileLoaded
+    //         ? "Loading profile..."
+    //         : !permissionsLoaded
+    //         ? "Loading permissions..."
+    //         : "Initializing..."}
+    //     </Typography>
+    //   </Box>
+    // );
   }
 
   // Drawer content

@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProviderWrapper } from "./Layout/ThemeContext";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -56,6 +61,15 @@ function App() {
         <Router>
           <ErrorBoundary>
             <Routes>
+              <Route
+                path="/test"
+                element={
+                  <div style={{ padding: "20px", fontFamily: "Arial" }}>
+                    <h1>Test Route</h1>
+                    <p>Router is working!</p>
+                  </div>
+                }
+              />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/renew-plan" element={<RenewPlanPage />} />
@@ -88,21 +102,8 @@ function App() {
                 element={<WaitingApprovalPage />}
               />
 
-              {/* <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<AppLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="jobs" element={<JobCards />} />
-              <Route path="inventory" element={<InventoryManagement />} />
-              <Route path="reports" element={<RecordReport />} />
-              <Route path="assign-engineer" element={<AssignEngineer />} />
-              <Route path="work-in-progress" element={<WorkInProgress />} />
-              <Route path="quality-check" element={<QualityCheck />} />
-              <Route path="reminders" element={<SetServiceReminder />} />
-              <Route path="insurance" element={<InsuranceManagement />} />
-            </Route>
-          </Route> */}
-
               {/* Redirect any unknown routes to login */}
+              <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
           </ErrorBoundary>
         </Router>
