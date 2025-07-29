@@ -48,36 +48,47 @@ function App() {
     );
   }
 
-  return (
-    <ThemeProviderWrapper>
-      <CssBaseline />
-      <Router>
-        <ErrorBoundary>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/renew-plan" element={<RenewPlanPage />} />
-            <Route path="/" element={<AppLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="jobs" element={<JobCards />} />
-              <Route path="jobs/:id" element={<JobCards />} />
-              <Route path="inventory" element={<InventoryManagement />} />
-              <Route path="reports" element={<RecordReport />} />
-              <Route path="assign-engineer/:id" element={<AssignEngineer />} />
-              <Route path="work-in-progress/:id" element={<WorkInProgress />} />
-              <Route path="quality-check/:id" element={<QualityCheck />} />
-              <Route path="reminders" element={<SetServiceReminder />} />
-              <Route path="insurance" element={<InsuranceManagement />} />
-              <Route path="billing/:id" element={<BillingPage />} />
-              <Route path="UserManagemt" element={<UserManagement />} />
-              <Route path="Profile" element={<Profile />} />
-              <Route path="add-Engineer" element={<AddEngineer />} />
-            </Route>
+  // Simple fallback if something goes wrong
+  try {
+    return (
+      <ThemeProviderWrapper>
+        <CssBaseline />
+        <Router>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/renew-plan" element={<RenewPlanPage />} />
+              <Route path="/" element={<AppLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="jobs" element={<JobCards />} />
+                <Route path="jobs/:id" element={<JobCards />} />
+                <Route path="inventory" element={<InventoryManagement />} />
+                <Route path="reports" element={<RecordReport />} />
+                <Route
+                  path="assign-engineer/:id"
+                  element={<AssignEngineer />}
+                />
+                <Route
+                  path="work-in-progress/:id"
+                  element={<WorkInProgress />}
+                />
+                <Route path="quality-check/:id" element={<QualityCheck />} />
+                <Route path="reminders" element={<SetServiceReminder />} />
+                <Route path="insurance" element={<InsuranceManagement />} />
+                <Route path="billing/:id" element={<BillingPage />} />
+                <Route path="UserManagemt" element={<UserManagement />} />
+                <Route path="Profile" element={<Profile />} />
+                <Route path="add-Engineer" element={<AddEngineer />} />
+              </Route>
 
-            <Route path="AwaitingApproval" element={<AwaitingApproval />} />
-            <Route path="/waiting-approval" element={<WaitingApprovalPage />} />
+              <Route path="AwaitingApproval" element={<AwaitingApproval />} />
+              <Route
+                path="/waiting-approval"
+                element={<WaitingApprovalPage />}
+              />
 
-            {/* <Route element={<ProtectedRoute />}>
+              {/* <Route element={<ProtectedRoute />}>
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="jobs" element={<JobCards />} />
@@ -91,12 +102,25 @@ function App() {
             </Route>
           </Route> */}
 
-            {/* Redirect any unknown routes to login */}
-          </Routes>
-        </ErrorBoundary>
-      </Router>
-    </ThemeProviderWrapper>
-  );
+              {/* Redirect any unknown routes to login */}
+            </Routes>
+          </ErrorBoundary>
+        </Router>
+      </ThemeProviderWrapper>
+    );
+  } catch (error) {
+    console.error("App rendering error:", error);
+    return (
+      <div
+        style={{ padding: "20px", fontFamily: "Arial", textAlign: "center" }}
+      >
+        <h1>App Error</h1>
+        <p>Something went wrong while loading the application.</p>
+        <p>Error: {error.message}</p>
+        <button onClick={() => window.location.reload()}>Reload Page</button>
+      </div>
+    );
+  }
 }
 
 export default App;
