@@ -560,6 +560,19 @@ const AppLayout = () => {
 
   // IMPROVED: Show loading state while initial load is happening
   if (!initialLoadComplete || !permissionsLoaded || !profileLoaded) {
+    // Check if we have basic authentication data
+    const token =
+      localStorage.getItem("token") || localStorage.getItem("garageToken");
+    const hasGarageId =
+      localStorage.getItem("garageId") || localStorage.getItem("garage_id");
+
+    // If no authentication data, redirect to login
+    if (!token || !hasGarageId) {
+      console.log("No authentication data found, redirecting to login");
+      window.location.href = "/login";
+      return null;
+    }
+
     return (
       <Box
         sx={{
