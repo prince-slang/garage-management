@@ -1028,13 +1028,30 @@ const Dashboard = () => {
                             const progress = getJobProgress(job);
                             const progressColor = getProgressColor(progress);
 
+                            // Debug: Log job data structure
+                            console.log(`Job ${index + 1} data:`, {
+                              _id: job._id,
+                              createdBy: job.createdBy,
+                              createdByType: typeof job.createdBy,
+                              customerName: job.customerName,
+                              customerNameType: typeof job.customerName,
+                              carNumber: job.carNumber,
+                              carNumberType: typeof job.carNumber,
+                            });
+
                             return (
                               <TableRow key={job._id}>
                                 <TableCell sx={{ fontWeight: 500 }}>
                                   {index + 1} {/* Display row number */}
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 500 }}>
-                                  {job.createdBy || "N/A"}
+                                  {typeof job.createdBy === "string"
+                                    ? job.createdBy
+                                    : job.createdBy &&
+                                      typeof job.createdBy === "object" &&
+                                      job.createdBy.name
+                                    ? job.createdBy.name
+                                    : "N/A"}
                                 </TableCell>
                                 <TableCell sx={{ fontWeight: 500 }}>
                                   {job.carNumber ||
