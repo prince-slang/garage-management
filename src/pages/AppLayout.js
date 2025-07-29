@@ -566,6 +566,16 @@ const AppLayout = () => {
     const hasGarageId =
       localStorage.getItem("garageId") || localStorage.getItem("garage_id");
 
+    console.log("AppLayout Debug:", {
+      initialLoadComplete,
+      permissionsLoaded,
+      profileLoaded,
+      hasToken: !!token,
+      hasGarageId: !!hasGarageId,
+      token: token ? "Token exists" : "No token",
+      garageId: hasGarageId || "No garageId",
+    });
+
     // If no authentication data, redirect to login
     if (!token || !hasGarageId) {
       console.log("No authentication data found, redirecting to login");
