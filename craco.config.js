@@ -36,29 +36,7 @@ module.exports = {
         process: false,
       };
 
-      // Optimize for production
-      if (env === "production") {
-        webpackConfig.optimization = {
-          ...webpackConfig.optimization,
-          splitChunks: {
-            chunks: "all",
-            cacheGroups: {
-              vendor: {
-                test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
-                chunks: "all",
-              },
-            },
-          },
-        };
-      }
-
       return webpackConfig;
-    },
-  },
-  devServer: {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
     },
   },
 };
