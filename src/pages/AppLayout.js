@@ -593,15 +593,18 @@ const AppLayout = () => {
       hasGarageId: !!hasGarageId,
       token: token ? "Token exists" : "No token",
       garageId: hasGarageId || "No garageId",
+      currentPath: window.location.pathname,
     });
 
     // If no authentication data, redirect to login
     if (!token || !hasGarageId) {
       console.log("No authentication data found, redirecting to login");
+      console.log("Current URL:", window.location.href);
       window.location.href = "/login";
       return null;
     }
 
+    console.log("Authentication data found, showing loading spinner");
     return (
       <Box
         sx={{

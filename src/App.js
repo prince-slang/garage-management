@@ -26,6 +26,27 @@ import AddEngineer from "./pages/AddEngineer";
 
 function App() {
   console.log("App component rendering...");
+  console.log("Current location:", window.location.pathname);
+  console.log("LocalStorage check:", {
+    token: !!localStorage.getItem("token"),
+    garageToken: !!localStorage.getItem("garageToken"),
+    garageId: !!localStorage.getItem("garageId"),
+    garage_id: !!localStorage.getItem("garage_id"),
+    userType: localStorage.getItem("userType"),
+  });
+
+  // Temporary simple test to see if basic rendering works
+  if (window.location.pathname === "/test") {
+    return (
+      <div style={{ padding: "20px", fontFamily: "Arial" }}>
+        <h1>Test Page</h1>
+        <p>If you can see this, basic rendering is working.</p>
+        <p>Current path: {window.location.pathname}</p>
+        <p>Token exists: {!!localStorage.getItem("token")}</p>
+        <p>GarageId exists: {!!localStorage.getItem("garageId")}</p>
+      </div>
+    );
+  }
 
   return (
     <ErrorBoundary>
