@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProviderWrapper } from "./Layout/ThemeContext";
+import "./utils/featureDetection"; // Import feature detection utilities
 import Dashboard from "./pages/Dashboard";
 import AppLayout from "./pages/AppLayout";
 import JobCards from "./pages/JobCards";
