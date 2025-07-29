@@ -49,10 +49,10 @@ function App() {
   }
 
   return (
-    <ErrorBoundary>
-      <ThemeProviderWrapper>
-        <CssBaseline />
-        <Router>
+    <ThemeProviderWrapper>
+      <CssBaseline />
+      <Router>
+        <ErrorBoundary>
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
@@ -93,9 +93,9 @@ function App() {
 
             {/* Redirect any unknown routes to login */}
           </Routes>
-        </Router>
-      </ThemeProviderWrapper>
-    </ErrorBoundary>
+        </ErrorBoundary>
+      </Router>
+    </ThemeProviderWrapper>
   );
 }
 
