@@ -223,8 +223,27 @@ const AppLayout = () => {
 
       if (response.data) {
         const garageData = response.data;
+
+        // Debug: Check what type of data we're getting
+        console.log("Garage data types:", {
+          name: typeof garageData.name,
+          nameValue: garageData.name,
+          email: typeof garageData.email,
+          emailValue: garageData.email,
+        });
+
+        // Ensure name is always a string
+        const garageName =
+          typeof garageData.name === "string"
+            ? garageData.name
+            : garageData.name &&
+              typeof garageData.name === "object" &&
+              garageData.name.name
+            ? garageData.name.name
+            : "Garage";
+
         setProfileData({
-          name: garageData.name || "Garage",
+          name: garageName,
           image: garageData.logo || "",
           email: garageData.email || "",
           phone: garageData.phone || "",
@@ -233,7 +252,7 @@ const AppLayout = () => {
           isSubscribed: garageData.isSubscribed || false,
         });
 
-        localStorage.setItem("garageName", garageData.name || "Garage");
+        localStorage.setItem("garageName", garageName);
         if (garageData.logo) {
           localStorage.setItem("garageLogo", garageData.logo);
         }
@@ -628,11 +647,13 @@ const AppLayout = () => {
             bgcolor: profileData.image ? "transparent" : "primary.main",
           }}
         >
-          {!profileData.image && profileData.name.charAt(0).toUpperCase()}
+          {!profileData.image &&
+            typeof profileData.name === "string" &&
+            profileData.name.charAt(0).toUpperCase()}
         </Avatar>
         <Box sx={{ ml: 1 }}>
           <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1.2 }}>
-            {profileData.name}
+            {typeof profileData.name === "string" ? profileData.name : "Garage"}
           </Typography>
           {profileData.isSubscribed && (
             <Typography
@@ -770,11 +791,26 @@ const AppLayout = () => {
               >
                 <Avatar
                   src={profileData.image}
-                  alt={profileData.name}
-                  sx={{ width: 32, height: 32 }}
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    bgcolor: profileData.image ? "transparent" : "primary.main",
+                    fontSize: "0.875rem",
+                    fontWeight: 600,
+                  }}
                 >
-                  {profileData.name.charAt(0)}
+                  {!profileData.image &&
+                    typeof profileData.name === "string" &&
+                    profileData.name.charAt(0).toUpperCase()}
                 </Avatar>
+                <Typography
+                  variant="body2"
+                  sx={{ fontWeight: 500, color: "text.primary" }}
+                >
+                  {typeof profileData.name === "string"
+                    ? profileData.name
+                    : "Garage"}
+                </Typography>
               </IconButton>
             </Tooltip>
           </Box>
