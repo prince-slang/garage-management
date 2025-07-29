@@ -213,7 +213,8 @@ const JobDetailsComponent = ({
 };
 
 const Dashboard = () => {
-  let garageId = localStorage.getItem("garageId");
+  let garageId =
+    localStorage.getItem("garageId") || localStorage.getItem("garage_id");
   if (!garageId) {
     garageId = localStorage.getItem("garage_id");
   }

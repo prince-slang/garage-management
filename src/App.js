@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ThemeProviderWrapper } from "./Layout/ThemeContext";
+import ErrorBoundary from "./components/ErrorBoundary";
 import "./utils/featureDetection"; // Import feature detection utilities
 import Dashboard from "./pages/Dashboard";
 import AppLayout from "./pages/AppLayout";
@@ -25,34 +26,35 @@ import AddEngineer from "./pages/AddEngineer";
 
 function App() {
   return (
-    <ThemeProviderWrapper>
-      <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/renew-plan" element={<RenewPlanPage />} />
-          <Route path="/" element={<AppLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="jobs" element={<JobCards />} />
-            <Route path="jobs/:id" element={<JobCards />} />
-            <Route path="inventory" element={<InventoryManagement />} />
-            <Route path="reports" element={<RecordReport />} />
-            <Route path="assign-engineer/:id" element={<AssignEngineer />} />
-            <Route path="work-in-progress/:id" element={<WorkInProgress />} />
-            <Route path="quality-check/:id" element={<QualityCheck />} />
-            <Route path="reminders" element={<SetServiceReminder />} />
-            <Route path="insurance" element={<InsuranceManagement />} />
-            <Route path="billing/:id" element={<BillingPage />} />
-            <Route path="UserManagemt" element={<UserManagement />} />
-            <Route path="Profile" element={<Profile />} />
-            <Route path="add-Engineer" element={<AddEngineer />} />
-          </Route>
+    <ErrorBoundary>
+      <ThemeProviderWrapper>
+        <CssBaseline />
+        <Router>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/renew-plan" element={<RenewPlanPage />} />
+            <Route path="/" element={<AppLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="jobs" element={<JobCards />} />
+              <Route path="jobs/:id" element={<JobCards />} />
+              <Route path="inventory" element={<InventoryManagement />} />
+              <Route path="reports" element={<RecordReport />} />
+              <Route path="assign-engineer/:id" element={<AssignEngineer />} />
+              <Route path="work-in-progress/:id" element={<WorkInProgress />} />
+              <Route path="quality-check/:id" element={<QualityCheck />} />
+              <Route path="reminders" element={<SetServiceReminder />} />
+              <Route path="insurance" element={<InsuranceManagement />} />
+              <Route path="billing/:id" element={<BillingPage />} />
+              <Route path="UserManagemt" element={<UserManagement />} />
+              <Route path="Profile" element={<Profile />} />
+              <Route path="add-Engineer" element={<AddEngineer />} />
+            </Route>
 
-          <Route path="AwaitingApproval" element={<AwaitingApproval />} />
-          <Route path="/waiting-approval" element={<WaitingApprovalPage />} />
+            <Route path="AwaitingApproval" element={<AwaitingApproval />} />
+            <Route path="/waiting-approval" element={<WaitingApprovalPage />} />
 
-          {/* <Route element={<ProtectedRoute />}>
+            {/* <Route element={<ProtectedRoute />}>
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="jobs" element={<JobCards />} />
@@ -66,10 +68,11 @@ function App() {
             </Route>
           </Route> */}
 
-          {/* Redirect any unknown routes to login */}
-        </Routes>
-      </Router>
-    </ThemeProviderWrapper>
+            {/* Redirect any unknown routes to login */}
+          </Routes>
+        </Router>
+      </ThemeProviderWrapper>
+    </ErrorBoundary>
   );
 }
 

@@ -84,7 +84,8 @@ const LoginPage = () => {
 
   // Check if user is already logged in
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token =
+      localStorage.getItem("garageToken") || localStorage.getItem("token");
     const userType = localStorage.getItem("userType");
     const garageId = localStorage.getItem("garageId");
 
@@ -229,7 +230,8 @@ const LoginPage = () => {
         return;
       }
 
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("garageToken", data.token);
+      localStorage.setItem("token", data.token); // Keep both for compatibility
       localStorage.setItem("userType", isGarageLogin ? "garage" : "user");
       localStorage.setItem(
         "name",
